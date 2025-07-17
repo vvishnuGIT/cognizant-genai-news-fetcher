@@ -1,0 +1,1 @@
+# cognizant-genai-news-fetcher
