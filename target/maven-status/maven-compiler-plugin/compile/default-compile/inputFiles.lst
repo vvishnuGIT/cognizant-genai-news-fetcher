@@ -1,0 +1,14 @@
+/workspace/src/main/java/com/cognizant/genai/newsfetcher/model/NewsSource.java
+/workspace/src/main/java/com/cognizant/genai/newsfetcher/service/ContentAnalysisService.java
+/workspace/src/main/java/com/cognizant/genai/newsfetcher/controller/NewsController.java
+/workspace/src/main/java/com/cognizant/genai/newsfetcher/service/NewsFetchingService.java
+/workspace/src/main/java/com/cognizant/genai/newsfetcher/service/RssFeedService.java
+/workspace/src/main/java/com/cognizant/genai/newsfetcher/repository/NewsSourceRepository.java
+/workspace/src/main/java/com/cognizant/genai/newsfetcher/controller/NewsSourceController.java
+/workspace/src/main/java/com/cognizant/genai/newsfetcher/config/AzureConfig.java
+/workspace/src/main/java/com/cognizant/genai/newsfetcher/config/ApplicationConfig.java
+/workspace/src/main/java/com/cognizant/genai/newsfetcher/model/NewsArticle.java
+/workspace/src/main/java/com/cognizant/genai/newsfetcher/GenAiNewsFetcherApplication.java
+/workspace/src/main/java/com/cognizant/genai/newsfetcher/service/NewsSourceService.java
+/workspace/src/main/java/com/cognizant/genai/newsfetcher/repository/NewsArticleRepository.java
+/workspace/src/main/java/com/cognizant/genai/newsfetcher/service/SharePointService.java

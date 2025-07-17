@@ -1,0 +1,80 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: genai-news-fetcher
+  
+  datasource:
+    url: jdbc:h2:mem:newsdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: 
+  
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+  
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+# Azure/SharePoint Configuration
+azure:
+  client-id: ${AZURE_CLIENT_ID:your-client-id}
+  client-secret: ${AZURE_CLIENT_SECRET:your-client-secret}
+  tenant-id: ${AZURE_TENANT_ID:your-tenant-id}
+  sharepoint:
+    site-url: ${SHAREPOINT_SITE_URL:https://cognizant.sharepoint.com/sites/your-site}
+    list-name: ${SHAREPOINT_LIST_NAME:GenAI News}
+
+# News Fetching Configuration
+news:
+  sources:
+    external:
+      - name: "TechCrunch AI"
+        url: "https://techcrunch.com/category/artificial-intelligence/feed/"
+        type: "RSS"
+      - name: "MIT Technology Review AI"
+        url: "https://www.technologyreview.com/topic/artificial-intelligence/feed/"
+        type: "RSS"
+      - name: "AI News"
+        url: "https://www.artificialintelligence-news.com/feed/"
+        type: "RSS"
+      - name: "OpenAI Blog"
+        url: "https://openai.com/blog/rss.xml"
+        type: "RSS"
+      - name: "Google AI Blog"
+        url: "https://ai.googleblog.com/feeds/posts/default"
+        type: "RSS"
+  
+  keywords:
+    - "generative ai"
+    - "genai"
+    - "artificial intelligence"
+    - "machine learning"
+    - "deep learning"
+    - "neural network"
+    - "gpt"
+    - "llm"
+    - "large language model"
+    - "chatgpt"
+    - "copilot"
+    - "ai automation"
+    - "cognitive computing"
+    - "natural language processing"
+    - "computer vision"
+  
+  scheduling:
+    fetch-interval: "0 0 */6 * * *" # Every 6 hours
+    cleanup-interval: "0 0 2 * * *" # Daily at 2 AM
+
+# Logging Configuration
+logging:
+  level:
+    com.cognizant.genai.newsfetcher: INFO
+    org.springframework.web: WARN
+    org.hibernate: WARN

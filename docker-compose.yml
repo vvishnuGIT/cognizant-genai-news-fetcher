@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  genai-news-fetcher:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      # Azure/SharePoint Configuration
+      - AZURE_CLIENT_ID=${AZURE_CLIENT_ID:-your-client-id}
+      - AZURE_CLIENT_SECRET=${AZURE_CLIENT_SECRET:-your-client-secret}
+      - AZURE_TENANT_ID=${AZURE_TENANT_ID:-your-tenant-id}
+      - SHAREPOINT_SITE_URL=${SHAREPOINT_SITE_URL:-https://cognizant.sharepoint.com/sites/your-site}
+      - SHAREPOINT_LIST_NAME=${SHAREPOINT_LIST_NAME:-GenAI News}
+      
+      # Database Configuration (Optional - for persistent storage)
+      # - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/newsdb
+      # - SPRING_DATASOURCE_USERNAME=postgres
+      # - SPRING_DATASOURCE_PASSWORD=password
+      
+      # Application Configuration
+      - SPRING_PROFILES_ACTIVE=prod
+      - SERVER_PORT=8080
+      
+    volumes:
+      # Optional: Mount logs directory
+      - ./logs:/app/logs
+    
+    restart: unless-stopped
+    
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  # Optional: PostgreSQL for persistent storage
+  # postgres:
+  #   image: postgres:15-alpine
+  #   environment:
+  #     - POSTGRES_DB=newsdb
+  #     - POSTGRES_USER=postgres
+  #     - POSTGRES_PASSWORD=password
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   ports:
+  #     - "5432:5432"
+  #   restart: unless-stopped
+
+# volumes:
+#   postgres_data:
