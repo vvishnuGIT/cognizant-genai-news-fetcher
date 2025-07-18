@@ -2,6 +2,7 @@
 /workspace/src/main/java/com/cognizant/genai/newsfetcher/service/ContentAnalysisService.java
 /workspace/src/main/java/com/cognizant/genai/newsfetcher/controller/NewsController.java
 /workspace/src/main/java/com/cognizant/genai/newsfetcher/service/NewsFetchingService.java
+/workspace/src/main/java/com/cognizant/genai/newsfetcher/config/SecurityConfig.java
 /workspace/src/main/java/com/cognizant/genai/newsfetcher/service/RssFeedService.java
 /workspace/src/main/java/com/cognizant/genai/newsfetcher/repository/NewsSourceRepository.java
 /workspace/src/main/java/com/cognizant/genai/newsfetcher/controller/NewsSourceController.java

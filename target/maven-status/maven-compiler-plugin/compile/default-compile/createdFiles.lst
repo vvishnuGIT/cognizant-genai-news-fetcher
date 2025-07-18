@@ -1,6 +1,7 @@
 com/cognizant/genai/newsfetcher/model/NewsArticle$SourceType.class
 com/cognizant/genai/newsfetcher/service/SharePointService.class
 com/cognizant/genai/newsfetcher/service/NewsSourceService.class
+com/cognizant/genai/newsfetcher/config/SecurityConfig.class
 com/cognizant/genai/newsfetcher/GenAiNewsFetcherApplication.class
 com/cognizant/genai/newsfetcher/service/NewsFetchingService.class
 com/cognizant/genai/newsfetcher/model/NewsSource.class
