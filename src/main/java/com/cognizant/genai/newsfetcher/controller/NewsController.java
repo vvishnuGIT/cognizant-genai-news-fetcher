@@ -29,7 +29,7 @@ public class NewsController {
     private final NewsFetchingService newsFetchingService;
     
     @GetMapping
-    public ResponseEntity<Page<NewsArticle>> getAllArticles(
+    public ResponseEntity<List<NewsArticle>> getAllArticles(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "20") int size,
             @RequestParam(defaultValue = "publishedDate") String sortBy,
@@ -42,7 +42,7 @@ public class NewsController {
             Pageable pageable = PageRequest.of(page, size, sort);
             Page<NewsArticle> articles = newsArticleRepository.findAll(pageable);
             
-            return ResponseEntity.ok(articles);
+            return ResponseEntity.ok(articles.getContent());
             
         } catch (Exception e) {
             log.error("Error fetching articles: {}", e.getMessage());
