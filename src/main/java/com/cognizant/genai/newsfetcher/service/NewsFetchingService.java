@@ -28,8 +28,13 @@ public class NewsFetchingService {
     private final SharePointService sharePointService;
     private final NewsSourceService newsSourceService;
     
-    @Value("${news.keywords}")
-    private List<String> keywordsList;
+    // GenAI keywords for content analysis
+    private final List<String> keywordsList = List.of(
+        "generative ai", "genai", "artificial intelligence", "machine learning",
+        "deep learning", "neural network", "gpt", "llm", "large language model",
+        "chatgpt", "copilot", "ai automation", "cognitive computing",
+        "natural language processing", "computer vision"
+    );
     
     @Scheduled(cron = "${news.scheduling.fetch-interval}")
     public void scheduledNewsFetch() {

@@ -22,37 +22,50 @@ public class NewsSourceService {
     
     private final NewsSourceRepository newsSourceRepository;
     
-    @Value("#{${news.sources.external}}")
-    private List<Map<String, String>> externalSources;
+    @Value("${news.sources.external:}")
+    private String externalSourcesConfig;
     
     @EventListener(ApplicationReadyEvent.class)
     public void initializeDefaultSources() {
         log.info("Initializing default news sources");
         
         try {
-            for (Map<String, String> sourceConfig : externalSources) {
-                String name = sourceConfig.get("name");
-                String url = sourceConfig.get("url");
-                String type = sourceConfig.get("type");
-                
-                if (name != null && url != null && !newsSourceRepository.existsByName(name)) {
-                    NewsSource source = new NewsSource();
-                    source.setName(name);
-                    source.setUrl(url);
-                    source.setSourceType(NewsArticle.SourceType.valueOf(type.toUpperCase()));
-                    source.setIsActive(true);
-                    source.setDescription("Auto-configured external RSS source");
-                    source.setFetchFrequencyHours(6);
-                    
-                    newsSourceRepository.save(source);
-                    log.info("Added default news source: {}", name);
-                }
-            }
-            
+            // Create default RSS sources
+            initializeDefaultRssSources();
             log.info("Default news sources initialization completed");
             
         } catch (Exception e) {
             log.error("Error initializing default news sources: {}", e.getMessage());
+        }
+    }
+    
+    private void initializeDefaultRssSources() {
+        // Default RSS sources for GenAI news
+        String[][] defaultSources = {
+            {"TechCrunch AI", "https://techcrunch.com/category/artificial-intelligence/feed/", "RSS"},
+            {"MIT Technology Review AI", "https://www.technologyreview.com/topic/artificial-intelligence/feed/", "RSS"},
+            {"AI News", "https://www.artificialintelligence-news.com/feed/", "RSS"},
+            {"OpenAI Blog", "https://openai.com/blog/rss.xml", "RSS"},
+            {"Google AI Blog", "https://ai.googleblog.com/feeds/posts/default", "RSS"}
+        };
+        
+        for (String[] sourceData : defaultSources) {
+            String name = sourceData[0];
+            String url = sourceData[1];
+            String type = sourceData[2];
+            
+            if (!newsSourceRepository.existsByName(name)) {
+                NewsSource source = new NewsSource();
+                source.setName(name);
+                source.setUrl(url);
+                source.setSourceType(NewsArticle.SourceType.valueOf(type.toUpperCase()));
+                source.setIsActive(true);
+                source.setDescription("Auto-configured external RSS source for GenAI news");
+                source.setFetchFrequencyHours(6);
+                
+                newsSourceRepository.save(source);
+                log.info("Added default news source: {}", name);
+            }
         }
     }
     
